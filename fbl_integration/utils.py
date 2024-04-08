@@ -1,5 +1,6 @@
 import requests
 from django.conf import settings
+from core.utils.general import sainitize_username
 from .models import FblAccount
 
 def fbl_auth_request_code(badge_number: int, dob: str) -> bool:
@@ -44,7 +45,8 @@ def get_or_create_account(account_info: dict[str, str]) -> FblAccount:
         return user
     
     # Create new user with (generic) username
-    user = FblAccount.create_user(account_info["username"])
+    clean_username = sainitize_username(account_info["username"])
+    user = FblAccount.create_user(clean_username)
     return FblAccount.objects.create(
         user=user,
         badge_number=account_info["badge"],
