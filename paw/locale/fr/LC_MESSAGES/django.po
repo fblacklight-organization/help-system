@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-08 14:59+0000\n"
+"POT-Creation-Date: 2024-04-12 19:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: core/forms.py:27 core/forms.py:35 paw/templates/core/account_finish.html:33
-#: paw/templates/core/login.html:24 paw/templates/core/register.html:24
+#: paw/templates/core/login.html:30 paw/templates/core/register.html:24
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
@@ -60,19 +60,131 @@ msgstr "Un compte utilisant ce nom d'utilisateur existe déjà"
 msgid "Google SSO User"
 msgstr "Utilisateur Google SSO"
 
-#: paw/settings.py:133
+#: fbl_integration/forms.py:18
+msgid "Badge number is required"
+msgstr ""
+
+#: fbl_integration/forms.py:25
+msgid "Badge number must be a number"
+msgstr ""
+
+#: fbl_integration/forms.py:30
+msgid "Date of birth is required"
+msgstr ""
+
+#: fbl_integration/forms.py:36
+msgid "Date of birth must be in the format DD/MM/YYYY"
+msgstr ""
+
+#: fbl_integration/forms.py:51
+msgid "The validation code is required. Please check your emails."
+msgstr ""
+
+#: fbl_integration/forms.py:65
+msgid "A Mail is required for notifications."
+msgstr ""
+
+#: fbl_integration/templates/complete_registration.html:6
+#: fbl_integration/templates/fbl_auth_get_code.html:6
+msgid "FurryBlacklight Login"
+msgstr ""
+
+#: fbl_integration/templates/complete_registration.html:10
+#: fbl_integration/templates/fbl_auth_get_code.html:12
+#: paw/templates/core/account_finish.html:13
+msgid "Authenticate"
+msgstr "Se connecter"
+
+#: fbl_integration/templates/complete_registration.html:11
+#: fbl_integration/templates/fbl_auth_get_code.html:13
+#: fbl_integration/templates/fbl_auth_get_code.html:53
+
+msgid "Confirm Code"
+msgstr "Confirmer le mot de passe"
+
+#: fbl_integration/templates/complete_registration.html:12
+#: fbl_integration/templates/fbl_auth_get_code.html:14
+msgid "Account Completion"
+msgstr ""
+
+#: fbl_integration/templates/complete_registration.html:13
+#: fbl_integration/templates/fbl_auth_get_code.html:15
+#: paw/templates/core/account_finish.html:15
+msgid "Done"
+msgstr "Terminer"
+
+#: fbl_integration/templates/complete_registration.html:17
+msgid "Please set up a mail address. This will be used for notifications."
+msgstr ""
+
+#: fbl_integration/templates/complete_registration.html:32
+#: paw/templates/core/settings.html:12
+msgid "Mail Address"
+msgstr "Adresse e-mail"
+
+#: fbl_integration/templates/complete_registration.html:38
+msgid "Save Changes"
+msgstr ""
+
+#: fbl_integration/templates/fbl_auth_get_code.html:8
+msgid "Go Back"
+msgstr ""
+
+#: fbl_integration/templates/fbl_auth_get_code.html:19
+msgid ""
+"We sent you an email that contains a code for your login. Please enter the "
+"code in the field below."
+msgstr ""
+
+#: fbl_integration/templates/fbl_auth_get_code.html:33
+#: fbl_integration/templates/partials/attendee_login.html:15
+msgid "Badge Number"
+msgstr ""
+
+#: fbl_integration/templates/fbl_auth_get_code.html:39
+#: fbl_integration/templates/partials/attendee_login.html:23
+msgid "Date of Birth"
+msgstr ""
+
+#: fbl_integration/templates/fbl_auth_get_code.html:48
+msgid "Verify Code"
+msgstr ""
+
+#: fbl_integration/templates/partials/attendee_info.html:4
+msgid "Rawrgister Info"
+msgstr ""
+
+#: fbl_integration/templates/partials/attendee_info.html:11
+#: paw/templates/base.html:21 paw/templates/dashboard_base.html:53
+#: paw/templates/ticketing/tickets.html:20
+msgid "Status"
+msgstr "Statut"
+
+#: fbl_integration/templates/partials/attendee_info.html:14
+msgid "Tags"
+msgstr ""
+
+#: fbl_integration/templates/partials/attendee_login.html:28
+msgid "Log In with FBL"
+msgstr "Se connecter avec FBL"
+
+#: fbl_integration/templates/partials/attendee_login.html:31
+msgid "I don\\'t have a seat for this years FBL"
+msgstr ""
+
+#: paw/settings.py:137
 msgid "English"
 msgstr "Anglais"
 
-#: paw/settings.py:134
+#: paw/settings.py:138
 msgid "French"
 msgstr "Français"
 
-#: paw/settings.py:135
+#: paw/settings.py:139
 msgid "German"
 msgstr "Allemand"
 
-#: paw/settings.py:136
+#: paw/settings.py:140
 msgid "Dutch"
 msgstr ""
 
@@ -80,49 +192,36 @@ msgstr ""
 msgid "Tickets"
 msgstr "Tickets"
 
-#: paw/templates/base.html:21 paw/templates/dashboard_base.html:53
-#: paw/templates/ticketing/tickets.html:20
-msgid "Status"
-msgstr "Statut"
-
 #: paw/templates/core/account_finish.html:10 paw/templates/core/register.html:6
 msgid "Register a new account"
 msgstr "Créer un nouveau compte"
 
-#: paw/templates/core/account_finish.html:13
-msgid "Authenticate"
-msgstr "Se connecter"
-
 #: paw/templates/core/account_finish.html:14
 msgid "Set up account"
 msgstr "Configurer le compte"
-
-#: paw/templates/core/account_finish.html:15
-msgid "Done"
-msgstr "Terminer"
 
 #: paw/templates/core/account_finish.html:38
 #: paw/templates/core/settings.html:55
 msgid "Save"
 msgstr "Enregistrer"
 
-#: paw/templates/core/login.html:7 paw/templates/core/login.html:39
+#: paw/templates/core/login.html:10 paw/templates/core/login.html:45
 msgid "Log In"
 msgstr "Connexion"
 
-#: paw/templates/core/login.html:9
+#: paw/templates/core/login.html:12
 msgid "Register Account"
 msgstr "Inscription"
 
-#: paw/templates/core/login.html:30 paw/templates/core/register.html:36
+#: paw/templates/core/login.html:36 paw/templates/core/register.html:36
 msgid "Password"
 msgstr "Mot de passe"
 
-#: paw/templates/core/login.html:35
+#: paw/templates/core/login.html:41
 msgid "Password Reset"
 msgstr "Redéfinir le mot de passe"
 
-#: paw/templates/core/login.html:46
+#: paw/templates/core/login.html:52
 msgid "Log in with Google"
 msgstr "Se connecter avec Google"
 
@@ -141,10 +240,6 @@ msgstr "S'enregistrer"
 #: paw/templates/core/settings.html:7 paw/templates/dashboard_base.html:85
 msgid "Settings"
 msgstr "Paramètres"
-
-#: paw/templates/core/settings.html:12
-msgid "Mail Address"
-msgstr "Adresse e-mail"
 
 #: paw/templates/core/settings.html:23
 msgid "Language"
@@ -186,7 +281,7 @@ msgid "Logout"
 msgstr "Se déconnecter"
 
 #: paw/templates/partials/assigned_to.html:17
-#: paw/templates/ticketing/ticket_detail.html:201
+#: paw/templates/ticketing/ticket_detail.html:203
 msgid "Unassigned"
 msgstr "Non attribué"
 
@@ -219,7 +314,7 @@ msgid "Create a new ticket"
 msgstr "Créer un ticket"
 
 #: paw/templates/ticketing/create_ticket.html:12
-#: paw/templates/ticketing/ticket_detail.html:165
+#: paw/templates/ticketing/ticket_detail.html:167
 #: paw/templates/ticketing/tickets.html:19
 #: paw/templates/ticketing/tickets_history.html:19
 msgid "Category"
@@ -300,31 +395,31 @@ msgstr "Créé le"
 msgid "Last updated"
 msgstr "Dernière mise à jour le"
 
-#: paw/templates/ticketing/ticket_detail.html:171
+#: paw/templates/ticketing/ticket_detail.html:173
 #: paw/templates/ticketing/tickets.html:42
 #: paw/templates/ticketing/tickets_history.html:42 ticketing/forms.py:81
 #: ticketing/forms.py:104 ticketing/models.py:167 ticketing/models.py:180
 msgid "General"
 msgstr "Général"
 
-#: paw/templates/ticketing/ticket_detail.html:177
+#: paw/templates/ticketing/ticket_detail.html:179
 msgid "Assign to new category"
 msgstr "Attribuer à une nouvelle catégorie"
 
-#: paw/templates/ticketing/ticket_detail.html:180
-#: paw/templates/ticketing/ticket_detail.html:210
+#: paw/templates/ticketing/ticket_detail.html:182
+#: paw/templates/ticketing/ticket_detail.html:212
 msgid "Assign"
 msgstr "Attribuer"
 
-#: paw/templates/ticketing/ticket_detail.html:185
+#: paw/templates/ticketing/ticket_detail.html:187
 msgid "Assignees"
 msgstr "Attribué à"
 
-#: paw/templates/ticketing/ticket_detail.html:192
+#: paw/templates/ticketing/ticket_detail.html:194
 msgid "Assign to me"
 msgstr "Me l'attribuer"
 
-#: paw/templates/ticketing/ticket_detail.html:207
+#: paw/templates/ticketing/ticket_detail.html:209
 msgid "Assign to new team"
 msgstr "Attribuer à une nouvelle équipe"
 
