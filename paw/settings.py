@@ -91,7 +91,7 @@ WSGI_APPLICATION = "paw.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-if environ['DATABASE_ENGINE'] == "sqlite3":
+if environ.get('DATABASE_ENGINE', 'sqlite3') == "sqlite3":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -172,7 +172,7 @@ LOGIN_REDIRECT_URL = "/tickets"
 LOGIN_URL = "/login"
 
 # Email
-if environ['MAIL_SERVER'] == "smtp":
+if environ.get('MAIL_SERVER', 'local') == "smtp":
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_FROM = environ['EMAIL_FROM']
     DEFAULT_FROM_EMAIL = environ['EMAIL_FROM']
@@ -185,11 +185,11 @@ else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Google SSO
-GOOGLE_OAUTH_ENABLED = environ.get('GOOGLE_OAUTH_ENABLED').lower() == 'true'
-GOOGLE_OAUTH_CLIENT_ID = environ['GOOGLE_OAUTH_CLIENT_ID']
-GOOGLE_OAUTH_PROJECT_ID = environ['GOOGLE_OAUTH_PROJECT_ID']
-GOOGLE_OAUTH_CLIENT_SECRET = environ['GOOGLE_OAUTH_CLIENT_SECRET']
-GOOGLE_OAUTH_REDIRECT_URI = environ['GOOGLE_OAUTH_REDIRECT_URI']
+GOOGLE_OAUTH_ENABLED = environ.get('GOOGLE_OAUTH_ENABLED', 'false').lower() == 'true'
+GOOGLE_OAUTH_CLIENT_ID = environ.get('GOOGLE_OAUTH_CLIENT_ID')
+GOOGLE_OAUTH_PROJECT_ID = environ.get('GOOGLE_OAUTH_PROJECT_ID')
+GOOGLE_OAUTH_CLIENT_SECRET = environ.get('GOOGLE_OAUTH_CLIENT_SECRET')
+GOOGLE_OAUTH_REDIRECT_URI = environ.get('GOOGLE_OAUTH_REDIRECT_URI')
 GOOGLE_OAUTH_SCOPES = environ.get('GOOGLE_OAUTH_SCOPES', '').split(",")
 
 # FBL Integration

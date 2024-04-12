@@ -33,7 +33,7 @@ poetry install
 ```
 
 3. Configure settings:
-   Copy `.env.example` to `.env` and update the configuration variables as needed.
+   Copy `example.env` to `.env` and update the configuration variables as needed.
 
 4. Run migrations:
 
@@ -61,6 +61,7 @@ services:
   paw:
     image: ghcr.io/aottr/paw:latest
     container_name: paw-ticket-system
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     restart: unless-stopped
     ports:
     - "127.0.0.1:8000:8000"
@@ -91,6 +92,15 @@ docker compose exec paw python manage.py collectstatic --no-input
 - Access the application through `http://localhost:8000`.
 - Register an account or log in with existing credentials.
 - Start creating and managing tickets based on your role and permissions.
+
+### Sending Mails
+If not configured, mails get sent to the console stdout. This is (mainly) for use in dev environments.
+SMTP can be used by setting the `MAIL_SERVER` variable to `smtp`.
+
+To also assign a display name when sending mails, adjust the `EMAIL_FROM` variable in the following format: 
+```
+EMAIL_FROM='Don't Reply <do_not_reply@domain.example>'
+```
 
 ## Contributing
 
