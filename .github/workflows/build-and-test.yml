@@ -42,7 +42,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/fbl-integration'
     permissions:
       contents: read
       packages: write # might need to use PAT instead
