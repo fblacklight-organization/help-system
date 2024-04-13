@@ -193,5 +193,5 @@ GOOGLE_OAUTH_REDIRECT_URI = environ.get('GOOGLE_OAUTH_REDIRECT_URI')
 GOOGLE_OAUTH_SCOPES = environ.get('GOOGLE_OAUTH_SCOPES', '').split(",")
 
 # FBL Integration
-FBL_AUTH_ENABLED = environ.get('FBL_AUTH_ENABLED').lower() == 'true'
-FBL_AUTH_SERVER = environ['FBL_AUTH_SERVER']
+FBL_AUTH_ENABLED = environ.get('FBL_AUTH_ENABLED', 'false').lower() == 'true'
+FBL_AUTH_SERVER = environ.get('FBL_AUTH_SERVER')
