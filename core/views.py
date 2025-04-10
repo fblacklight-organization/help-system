@@ -93,8 +93,8 @@ def oauth2_callback_view(request):
         _ = oauth_sso.fetch_token(request.GET.get("code"))
         user_info = oauth_sso.get_user_info()
     except Exception:
-            print("error receiving user info")
-            return redirect("login")
+        print("error receiving user info")
+        return redirect("login")
             
     # Check if user already exists
     oauth2_user = Oauth2User.objects.filter(oauth2_id=user_info["sub"]).first()
