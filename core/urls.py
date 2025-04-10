@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import home_view, logout_view, settings_view, register_view, login_view, google_callback_view
+from .views import home_view, logout_view, settings_view, register_view, login_view, google_callback_view, oauth2_callback_view
 
 urlpatterns = [
     path("", home_view, name="home"),
@@ -9,4 +9,5 @@ urlpatterns = [
     path("login", login_view, name="login"),
     path("logout", logout_view, name="logout"),
     path("callback/google", google_callback_view, name="google_callback"),
+    path("callback/oauth2", oauth2_callback_view, name="oauth2_callback"),
 ]

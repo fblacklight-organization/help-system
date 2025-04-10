@@ -9,10 +9,10 @@ class PawUser(AbstractUser):
     profile_picture = models.ImageField(
         upload_to='profile_pics/', null=True, blank=True)
     language = models.CharField(max_length=2, default='en')
+    display_name = models.CharField(max_length=100, null=True, blank=True)
     telegram_username = models.CharField(max_length=50, null=True, blank=True)
     use_darkmode = models.BooleanField(default=False)
     receive_email_notifications = models.BooleanField(default=True)
-
     def __str__(self):
         return self.username
 
@@ -28,6 +28,18 @@ class GoogleSSOUser(models.Model):
     class Meta:
         db_table = "google_sso_user"
         verbose_name = _("Google SSO User")
+
+class Oauth2User(models.Model):
+    paw_user = models.OneToOneField(
+        PawUser, on_delete=models.CASCADE, primary_key=True)
+    oauth2_id = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.paw_user.username
+
+    class Meta:
+        db_table = "oauth2_user"
+        verbose_name = _("OAuth2 User")
 
 class MailTemplate(models.Model):
     event = models.CharField(max_length=100)

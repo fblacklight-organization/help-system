@@ -195,3 +195,13 @@ GOOGLE_OAUTH_SCOPES = environ.get('GOOGLE_OAUTH_SCOPES', '').split(",")
 # FBL Integration
 FBL_AUTH_ENABLED = environ.get('FBL_AUTH_ENABLED', 'false').lower() == 'true'
 FBL_AUTH_SERVER = environ.get('FBL_AUTH_SERVER')
+
+# OAuth2
+OAUTH2_ENABLED = environ.get('OAUTH2_ENABLED', 'false').lower() == 'true'
+OAUTH2_CLIENT_ID = environ.get('OAUTH2_CLIENT_ID')
+OAUTH2_CLIENT_SECRET = environ.get('OAUTH2_CLIENT_SECRET')
+OAUTH2_TOKEN_URL = environ.get('OAUTH2_TOKEN_URL')
+OAUTH2_AUTH_URL = environ.get('OAUTH2_AUTH_URL')
+OAUTH2_USERINFO_URL = environ.get('OAUTH2_USERINFO_URL')
+OAUTH2_REDIRECT_URI = environ.get('OAUTH2_REDIRECT_URI')
+OAUTH2_SCOPE = environ.get('OAUTH2_SCOPE', '').split(",")

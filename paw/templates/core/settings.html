@@ -11,7 +11,7 @@
             <div class="label">
               <span for="{{ form.email.id_for_label }}" class="label-text font-semibold text-base-content">{% trans 'Mail Address' %}</span>
             </div>
-            {% if request.user.googlessouser %}
+            {% if request.user.googlessouser or request.user.oauth2user %}
             {{ form.email|add_attr:'class:input input-bordered w-full input-disabled,readonly:' }}
             {% else %}
             {{ form.email }}

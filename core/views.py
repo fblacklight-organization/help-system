@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
+
+from core.utils.oauth2 import OAuth2
 from .forms import UserChangeForm, RegisterForm, AccountFinishForm
 from django.contrib.auth.forms import AuthenticationForm
-from .models import PawUser, GoogleSSOUser
+from .models import Oauth2User, PawUser, GoogleSSOUser
 from django.utils import translation
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -51,6 +53,12 @@ def login_view(request):
         request.session["sso_state"] = state
         # request.session["sso_next_url"] = next_path
         request.session.save()
+    
+    if settings.OAUTH2_ENABLED:
+        oauth_sso = OAuth2()
+        oauth2_auth_url, state = oauth_sso.get_authorization_url()
+        request.session["oauth_state"] = state
+        request.session.save()
 
     if request.method == "POST":
         form = AuthenticationForm(request=request, data=request.POST)
@@ -61,8 +69,47 @@ def login_view(request):
     else:
         form = AuthenticationForm()
 
-    return render(request, "core/login.html", {"form": form, "google_sso_enabled": settings.GOOGLE_OAUTH_ENABLED, "google_sso_auth_url": auth_url})
+    return render(request, "core/login.html", {
+        "form": form, 
+        "google_sso_enabled": settings.GOOGLE_OAUTH_ENABLED, 
+        "google_sso_auth_url": auth_url,
+        "oauth2_enabled": settings.OAUTH2_ENABLED,
+        "oauth2_auth_url": oauth2_auth_url,
+        })
 
+def oauth2_callback_view(request):
+
+    if not settings.OAUTH2_ENABLED:
+        return redirect("login")
+    state = request.GET.get("state")
+
+    if state != request.session.get("oauth_state"):
+        return redirect("login")
+    try:
+        oauth_sso = OAuth2()
+        _ = oauth_sso.fetch_token(request.GET.get("code"))
+        user_info = oauth_sso.get_user_info()
+    except Exception:
+            return redirect("login")
+    print(user_info)
+    # Check if user already exists
+    oauth2_user = Oauth2User.objects.filter(oauth2_id=user_info["sub"]).first()
+    if oauth2_user:
+        login(request, oauth2_user.paw_user)
+        return redirect("home")
+    
+    # Create user if not exists
+    unique_username = PawUser.objects.filter(username=user_info["nickname"]).exists()
+    # TODO: Set up account finish form
+    user, created = PawUser.objects.get_or_create(email=user_info["email"], defaults={
+        "username": user_info["nickname"] if not unique_username else user_info["email"],
+        "display_name": user_info["name"],
+        })
+    if created:
+        Oauth2User.objects.create(paw_user=user, oauth2_id=user_info["sub"])
+    
+    login(request, user)
+    return redirect("home")
 
 def google_callback_view(request):
 
@@ -121,7 +168,7 @@ def settings_view(request):
                 translation.activate(form.cleaned_data["language"])
                 changed_user_language = True
 
-            if not hasattr(request.user, 'googlessouser'):
+            if not hasattr(request.user, 'googlessouser') and not hasattr(request.user, 'oauth2user'):
                 request.user.email = form.cleaned_data["email"]
 
             request.user.language = form.cleaned_data["language"]
