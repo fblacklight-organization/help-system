@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import PawUser, MailTemplate, GoogleSSOUser
+from .models import PawUser, MailTemplate, GoogleSSOUser, Oauth2User
 
 
 @admin.register(PawUser)
@@ -18,3 +18,7 @@ class MailTemplateAdmin(admin.ModelAdmin):
 @admin.register(GoogleSSOUser)
 class GoogleSSOUserAdmin(admin.ModelAdmin):
     list_display = ('paw_user', 'google_id')
+
+@admin.register(Oauth2User)
+class Oauth2UserAdmin(admin.ModelAdmin):
+    list_display = ('paw_user', 'oauth2_id')

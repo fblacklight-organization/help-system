@@ -80,39 +80,34 @@ def login_view(request):
 def oauth2_callback_view(request):
 
     if not settings.OAUTH2_ENABLED:
-        print("error oauth2 disabled")
         return redirect("login")
     
     state = request.GET.get("state")
 
     if state != request.session.get("oauth_state"):
-        print("error oauth_state not set")
         return redirect("login")
     try:
         oauth_sso = OAuth2()
         _ = oauth_sso.fetch_token(request.GET.get("code"))
         user_info = oauth_sso.get_user_info()
     except Exception:
-        print("error receiving user info")
         return redirect("login")
             
     # Check if user already exists
     oauth2_user = Oauth2User.objects.filter(oauth2_id=user_info["sub"]).first()
     if oauth2_user:
-        print("found user")
         login(request, oauth2_user.paw_user)
         return redirect("home")
     
     # Create user if not exists
     unique_username = PawUser.objects.filter(username=user_info["nickname"]).exists()
     # TODO: Set up account finish form
-    user, created = PawUser.objects.get_or_create(email=user_info["email"], defaults={
+    user, _ = PawUser.objects.get_or_create(email=user_info["email"], defaults={
         "username": user_info["nickname"] if not unique_username else user_info["email"],
         "display_name": user_info["name"],
         })
-    print("use existing user")
-    if created:
-        Oauth2User.objects.create(paw_user=user, oauth2_id=user_info["sub"])
+
+    Oauth2User.objects.create(paw_user=user, oauth2_id=user_info["sub"])
     
     login(request, user)
     return redirect("home")
