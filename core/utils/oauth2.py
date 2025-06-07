@@ -4,6 +4,7 @@ from typing import Optional
 from django.utils.translation import gettext_lazy as _
 from requests_oauthlib import OAuth2Session
 from django.conf import settings
+import jwt
 
 @dataclass
 class OAuth2:
@@ -32,6 +33,16 @@ class OAuth2:
             code=code,
         )
         return token
+    
+    def _get_token_content(self) -> dict:
+        return jwt.decode(
+            jwt=self.oauth2_session.token['id_token'], 
+            key=settings.OAUTH2_CLIENT_SECRET, 
+            audience=settings.OAUTH2_CLIENT_ID,
+            algorithms=["HS256"]
+        )
+    def get_registration_info(self) -> dict | None:
+        return self._get_token_content()["registration"]
 
     def get_user_info(self) -> dict:
         return self.oauth2_session.get(

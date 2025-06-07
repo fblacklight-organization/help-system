@@ -92,6 +92,11 @@ def oauth2_callback_view(request):
         user_info = oauth_sso.get_user_info()
     except Exception:
         return redirect("login")
+    try:
+        print(oauth_sso.get_registration_info())
+    except Exception as e:
+        print(e)
+        print("Error getting token content")
             
     # Check if user already exists
     oauth2_user = Oauth2User.objects.filter(oauth2_id=user_info["sub"]).first()
