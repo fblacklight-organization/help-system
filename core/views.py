@@ -41,6 +41,7 @@ def register_view(request):
 def login_view(request):
 
     auth_url = None
+    oauth2_auth_url = None
 
     if settings.GOOGLE_OAUTH_ENABLED:
         google_sso = GoogleSSO()
